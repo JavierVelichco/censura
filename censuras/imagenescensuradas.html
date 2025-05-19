@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Imágenes Censuradas</title>
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      width: 100%;
+      max-width: 1000px;
+    }
+
+   .imagen-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative; /* ← necesario */
+  overflow: visible;
+}
+
+    canvas {
+      width: 100%;
+      max-width: 300px;
+      aspect-ratio: 1 / 1;
+      border: 2px solid #444;
+    }
+
+    .msg {
+      margin-top: 10px;
+      font-size: 1em;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .msg.visible {
+      opacity: 1;
+    }
+  .gridm {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 columnas */
+  gap: 20px;
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 40px;
+}
+
+.mariposa-container {
+  position: relative; /* importante para que las mariposas absolutas estén dentro */
+  height: 100px; /* o el alto que quieras para el área donde vuelan */
+  width: 100%;
+  background-color: transparent;
+  overflow: visible;
+}
+
+.mariposa-container.visible {
+  opacity: 1;
+}
+
+.mariposa {
+  width: 80px;
+  height: 80px;
+  background-image: url('../img/mariposa.png'); /* poné tu imagen de mariposa */
+  background-size: cover;
+  display: block;
+  opacity: 0;
+  pointer-events: auto;
+}
+
+  </style>
+</head>
+<body>
+
+<div class="grid">
+  <div class="imagen-container">
+    <canvas width="350" height="250" class="canvas"></canvas>
+      <div class="msg">Haz clic para ver más</div> <!-- ESTO FALTA -->
+
+  </div>
+  <div class="imagen-container">
+    <canvas width="350" height="250" class="canvas"></canvas>
+      <div class="msg">Haz clic para ver más</div> <!-- ESTO FALTA -->
+
+  </div>
+  <div class="imagen-container">
+    <canvas width="350" height="250" class="canvas"></canvas>
+      <div class="msg">Haz clic para ver más</div> <!-- ESTO FALTA -->
+
+  </div>
+  <div class="imagen-container">
+    <canvas width="350" height="250" class="canvas"></canvas>
+      <div class="msg">Haz clic para ver más</div> <!-- ESTO FALTA -->
+
+  </div>
+  <div class="imagen-container">
+    <canvas width="350" height="250" class="canvas"></canvas>
+      <div class="msg">Haz clic para ver más</div> <!-- ESTO FALTA -->
+
+  </div>
+  <div class="imagen-container">
+    <canvas width="350" height="250" class="canvas"></canvas>
+      <div class="msg">Haz clic para ver más</div> <!-- ESTO FALTA -->
+
+  </div>
+</div>
+<div class="gridm">
+  <div class="mariposa-container"></div>
+  <div class="mariposa-container"></div>
+  <div class="mariposa-container"></div>
+  <div class="mariposa-container"></div>
+  <div class="mariposa-container"></div>
+  <div class="mariposa-container"></div>
+</div>
+
+  <script>
+const canvases = document.querySelectorAll('.canvas');
+const mensajes = document.querySelectorAll('.msg');
+const enlaces = [
+  '../censuras/ysiestasemana.html',
+  '../censuras/libertadexpresion.html',
+  '../censuras/chinanodice.html',
+  '../censuras/lindotormenta.html',
+  '../censuras/chinanodice.html',
+  '../censuras/videocensura.html'
+];
+const mariposaContainers = document.querySelectorAll('.mariposa-container');
+
+const imagenes = [
+  '../img/winniechina.png',
+  '../img/periodistapalestino.png',
+  '../img/nicaragua.png',
+  '../img/moscu.png',
+  '../img/tankman.png',
+  '../img/cuba.png'
+];
+
+    function animarMariposa(mariposa) {
+  let x = Math.random() * 100; // posición inicial relativa
+  let y = 0;
+  const velocidadY = 0.5 + Math.random(); // velocidad vertical
+  const amplitud = 40 + Math.random() * 60; // cuánto se mueve hacia los lados
+  const frecuencia = 0.04 + Math.random() * 0.05; // curva del zigzag
+  const inicio = Date.now();
+
+  function mover() {
+    const t = (Date.now() - inicio) / 1000;
+    y = -t * 50; // velocidad vertical hacia arriba
+    const offsetX = Math.sin(t * 2 * Math.PI * frecuencia) * amplitud;
+
+    mariposa.style.transform = `translate(${x + offsetX}px, ${y}px)`;
+    mariposa.style.opacity = 1 - Math.abs(y) / 200;
+
+    if (y > -200) {
+      requestAnimationFrame(mover);
+    } else {
+      mariposa.remove(); // desaparece cuando se va arriba
+    }
+  }
+
+  mover();
+}
+
+
+canvases.forEach((canvas, index) => {
+  const ctx = canvas.getContext('2d');
+  const img = new Image();
+  img.src = imagenes[index];
+
+  img.onload = () => {
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+
+
+    setTimeout(() => {
+  
+
+      pixelarImagen(img, canvas, ctx, 10); // Censura
+
+      mensajes[index].classList.add('visible');
+
+      // Crear enlace de mariposa animada
+      const mariposaLink = document.createElement('a');
+      mariposaLink.href = enlaces[index];
+      mariposaLink.target = "_blank";
+      mariposaLink.className = 'mariposa';
+
+      // Posicionamiento para que "suba"
+      mariposaLink.style.position = 'absolute';
+      mariposaLink.style.left = '50%';
+      mariposaLink.style.bottom = '0';
+      mariposaLink.style.transform = 'translateX(-50%)';
+
+      mariposaContainers[index].appendChild(mariposaLink);
+      animarMariposa(mariposaLink);
+
+      mariposaContainers[index].classList.add('visible');
+
+      // Crear mariposas en bucle
+      setInterval(() => {
+        const nuevaMariposa = document.createElement('a');
+        nuevaMariposa.href = enlaces[index];
+        nuevaMariposa.target = "_blank";
+        nuevaMariposa.className = 'mariposa';
+        nuevaMariposa.style.position = 'absolute';
+        nuevaMariposa.style.left = '50%';
+        nuevaMariposa.style.bottom = '0';
+        nuevaMariposa.style.transform = 'translateX(-50%)';
+
+  mariposaContainers[index].appendChild(nuevaMariposa);
+animarMariposa(nuevaMariposa); // 🎉 animación aleatoria
+
+      }, 4000); // 4000ms = 4 segundos
+    }, 4000); // Primer retraso
+  };
+});
+
+function pixelarImagen(img, canvas, ctx, pixelSize) {
+  const { width, height } = canvas;
+  const tempCanvas = document.createElement('canvas');
+  const tempCtx = tempCanvas.getContext('2d');
+
+  tempCanvas.width = width / pixelSize;
+  tempCanvas.height = height / pixelSize;
+
+  tempCtx.drawImage(img, 0, 0, tempCanvas.width, tempCanvas.height);
+
+  ctx.imageSmoothingEnabled = false;
+  ctx.clearRect(0, 0, width, height);
+  ctx.drawImage(
+    tempCanvas,
+    0,
+    0,
+    tempCanvas.width,
+    tempCanvas.height,
+    0,
+    0,
+    width,
+    height
+  );
+}
+  </script>
+</body>
+</html>

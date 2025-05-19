@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Términos Censurados en China</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        h1 {
+            text-align: center;
+            color: #b22222;
+        }
+
+        .term {
+            background-color: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 5px solid #b22222;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            transition: filter 1s ease;
+        }
+
+        .term h2 {
+            margin: 0;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .term p {
+            margin: 5px 0 0 0;
+            color: #555;
+        }
+
+        .chino {
+            color: #006400;
+            font-weight: bold;
+        }
+
+        .censurado {
+            filter: blur(8px);
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            text-align: center;
+            padding: 10px;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .term.censurado .overlay {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Términos Censurados en China</h1>
+
+     <div class="term" onclick="location.href='imagenescensuradas.html'">
+        <h2>Winnie the Pooh <span class="chino">(小熊维尼)</span></h2>
+        <p>Los internautas chinos utilizan imágenes de Winnie Pooh para representar al presidente Xi Jinping.</p>
+        <div class="overlay">Contenido censurado</div>
+    </div>
+
+    <div class="term">
+        <h2>Baozi <span class="chino">(包子)</span></h2>
+        <p>“Dumpling”, que significa “empanada de masa hervida”, es uno de los apodos de Xi Jinping en línea.</p>
+        <div class="overlay">Contenido censurado</div>
+    </div>
+
+    <div class="term">
+        <h2>Dalai Lama <span class="chino">(达赖喇嘛)</span></h2>
+        <p>El líder tibetano en el exilio. Un símbolo de la independencia tibetana.</p>
+        <div class="overlay">Contenido censurado</div>
+    </div>
+
+
+    <div class="term">
+        <h2>Independencia de Tíbet <span class="chino">(西藏独立)</span></h2>
+        <p>Está prohibido hablar sobre la independencia de Tíbet.</p>
+        <div class="overlay">Contenido censurado</div>
+    </div>
+
+    <div class="term">
+        <h2>Chistes sobre los soviéticos <span class="chino">(苏联笑话)</span></h2>
+        <p>Reírse de la Unión Soviética se considera reírse del comunismo.</p>
+        <div class="overlay">Contenido censurado</div>
+    </div>
+
+    <div class="term">
+        <h2>Ánimo, Hong Kong <span class="chino">(香港加油)</span></h2>
+        <p>Apoyar las protestas en favor de la democracia en Hong Kong está prohibido.</p>
+        <div class="overlay">Contenido censurado</div>
+    </div>
+
+    <div class="term">
+        <h2>709 <span class="chino">(709律师)</span></h2>
+        <p>Un grupo de activistas de derechos humanos y abogados arrestados el 9 de julio (9/7) de 2015.</p>
+        <div class="overlay">Contenido censurado</div>
+    </div>
+
+    <div class="term">
+        <h2>Liu Xiaobo <span class="chino">(刘晓波)</span></h2>
+        <p>Activista de derechos humanos encarcelado por China, galardonado con el premio Nobel de la Paz.</p>
+        <div class="overlay">Contenido censurado</div>
+    </div>
+
+    <div class="term">
+        <h2>Gran Muralla de Internet de China <span class="chino">(伟大的防火墙)</span></h2>
+        <p>Hablar sobre la censura china está censurado en sí mismo.</p>
+        <div class="overlay">Contenido censurado</div>
+    </div>
+
+    <div class="term">
+        <h2>Dictadura <span class="chino">(专政)</span></h2>
+        <p>Está prohibido insinuar que China es una dictadura.</p>
+        <div class="overlay">Contenido censurado</div>
+    </div>
+
+    <div class="term">
+        <h2>Tiananmen <span class="chino">(天安门)</span></h2>
+        <p>Cualquier referencia a las manifestaciones de 1989 por la democracia que terminaron en un baño de sangre.</p>
+        <div class="overlay">Contenido censurado</div>
+    </div>
+
+    <div class="term">
+        <h2>4 de junio <span class="chino">(六四)</span></h2>
+        <p>La fecha de las protestas de 1989 en la plaza de Tiananmen.</p>
+        <div class="overlay">Contenido censurado</div>
+    </div>
+
+    <div class="term">
+        <h2>Zhao Ziyang <span class="chino">(赵紫阳)</span></h2>
+        <p>Exsecretario general del Partido Comunista Chino que apoyó las manifestaciones de 1989 en la plaza de Tiananmen.</p>
+        <div class="overlay">Contenido censurado</div>
+    </div>
+
+    <div class="term">
+        <h2>El hombre del tanque <span class="chino">(坦克人)</span></h2>
+        <p>La famosa imagen de un hombre chino no identificado que se paró frente a una columna de tanques en la plaza de Tiananmen en 1989.</p>
+        <div class="overlay">Contenido censurado</div>
+    </div>
+
+    <script>
+        // Censura el contenido textual después de 10 segundos
+        setTimeout(() => {
+            document.querySelectorAll('.term').forEach(term => {
+                term.classList.add('censurado');
+            });
+        }, 5000); // 10 segundos
+
+        // Censura también la imagen después de 15 segundos
+        setTimeout(() => {
+            document.querySelectorAll('.image-overlay').forEach(img => {
+                img.classList.add('image-censurada');
+            });
+        }, 5200); // 15 segundos
+    </script>
+</body>
+</html>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Censura</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            color: #333;
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Redirigiendo a una página aleatoria...</h1>
+
+    <script>
+        // Lista de páginas disponibles
+        const paginas = [
+            'censuras/lindotormenta.html',  // Nombre de la página 1
+            'censuras/ysiestasemana.html',  // Nombre de la página 2
+            'censuras/libertdexpresion.html',  // Nombre de la página 3
+            'censuras/imagenescensuradas.html',   // Nombre de la página 4
+            'censuras/videocensura.html',   // Nombre de la página 5
+            'censuras/chinanodice.html',   // Nombre de la página 6
+            'censuras/carousel.html',   // Nombre de la página 6
+            'censuras/chinanodice.html',   // Nombre de la página 6
+        ];
+
+        // Función para redirigir aleatoriamente a una página de la lista
+        function redirigirAleatorio() {
+            // Generamos un índice aleatorio entre 0 y el número de páginas
+            const indiceAleatorio = Math.floor(Math.random() * paginas.length);
+            
+            // Redirigimos a la página seleccionada aleatoriamente
+            window.location.href = paginas[indiceAleatorio];
+        }
+
+        // Llamamos a la función cuando la página cargue
+        window.onload = redirigirAleatorio;
+    </script>
+</body>
+</html>

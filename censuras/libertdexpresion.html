@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tetris de Censura</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    canvas {
+      image-rendering: pixelated;
+      background: url('https://picsum.photos/300/600') no-repeat center;
+      background-size: cover;
+      border: 4px solid #222;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="game" width="300" height="600"></canvas>
+
+  <script>
+    const canvas = document.getElementById("game");
+    const ctx = canvas.getContext("2d");
+
+    const COLS = 10;
+    const ROWS = 20;
+    const BLOCK_SIZE = 30;
+    const EMPTY = 0;
+
+    // Matriz del tablero
+    const board = Array.from({ length: ROWS }, () => Array(COLS).fill(EMPTY));
+
+    // Piezas tipo Tetris (I, J, L, O, S, T, Z)
+    const SHAPES = {
+      I: [[1, 1, 1, 1]],
+      J: [[1, 0, 0], [1, 1, 1]],
+      L: [[0, 0, 1], [1, 1, 1]],
+      O: [[1, 1], [1, 1]],
+      S: [[0, 1, 1], [1, 1, 0]],
+      T: [[0, 1, 0], [1, 1, 1]],
+      Z: [[1, 1, 0], [0, 1, 1]]
+    };
+
+    const SHAPE_KEYS = Object.keys(SHAPES);
+
+    function getRandomPiece() {
+      const type = SHAPE_KEYS[Math.floor(Math.random() * SHAPE_KEYS.length)];
+      return {
+  matrix: SHAPES[type],
+  x: Math.floor(Math.random() * (COLS - SHAPES[type][0].length)),
+  y: 0
+};
+    }
+
+    let current = getRandomPiece();
+    let dropCounter = 0;
+    let dropInterval = 250;
+    let lastTime = 0;
+
+    function drawBlock(x, y) {
+      ctx.fillStyle = 'black';
+      ctx.globalAlpha = 0.95;
+      ctx.fillRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+      ctx.globalAlpha = 1;
+    }
+
+    function drawMatrix(matrix, offsetX, offsetY) {
+      matrix.forEach((row, y) => {
+        row.forEach((value, x) => {
+          if (value) {
+            drawBlock(x + offsetX, y + offsetY);
+          }
+        });
+      });
+    }
+
+    function drawBoard() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      board.forEach((row, y) => {
+        row.forEach((value, x) => {
+          if (value) {
+            drawBlock(x, y);
+          }
+        });
+      });
+      drawMatrix(current.matrix, current.x, current.y);
+    }
+
+    function merge(board, piece) {
+      piece.matrix.forEach((row, y) => {
+        row.forEach((value, x) => {
+          if (value) {
+            board[y + piece.y][x + piece.x] = 1;
+          }
+        });
+      });
+    }
+
+    function collide(board, piece) {
+      for (let y = 0; y < piece.matrix.length; y++) {
+        for (let x = 0; x < piece.matrix[y].length; x++) {
+          if (
+            piece.matrix[y][x] &&
+            (board[y + piece.y] && board[y + piece.y][x + piece.x]) !== EMPTY
+          ) {
+            return true;
+          }
+        }
+      }
+      return false;
+    }
+
+    function rotate(matrix) {
+      return matrix[0].map((_, i) => matrix.map(row => row[i]).reverse());
+    }
+
+    function playerRotate() {
+      const rotated = rotate(current.matrix);
+      const originalX = current.x;
+      let offset = 1;
+      while (collide(board, { ...current, matrix: rotated })) {
+        current.x += offset;
+        offset = -(offset + (offset > 0 ? 1 : -1));
+        if (offset > current.matrix[0].length) {
+          current.x = originalX;
+          return;
+        }
+      }
+      current.matrix = rotated;
+    }
+
+    function playerDrop() {
+      current.y++;
+      if (collide(board, current)) {
+        current.y--;
+        merge(board, current);
+        resetPiece();
+        clearLines();
+      }
+      dropCounter = 0;
+    }
+
+    function resetPiece() {
+      current = getRandomPiece();
+      if (collide(board, current)) {
+        alert("Censura completa");
+        board.forEach(row => row.fill(0));
+        // Redirigir después de mostrar la alerta de "Censura completa"
+        setTimeout(() => {
+          window.location.href = "../index.html"; // Redirige al usuario
+        }, 1000); // Redirige después de 1 segundo para dar tiempo a que el mensaje se vea
+      }
+    }
+
+    function clearLines() {
+  outer: for (let y = board.length - 1; y >= 0; y--) {
+    if (board[y].every(value => value !== EMPTY)) {
+      board.splice(y, 1);
+      board.unshift(Array(COLS).fill(EMPTY));
+      y++;
+
+      // 💥 Aumenta la velocidad: más censura, más rápido
+      if (dropInterval > 100) {
+        dropInterval -= 20;
+        console.log("Velocidad aumentada:", dropInterval + "ms");
+      }
+    }
+  }
+}
+
+
+    function update(time = 0) {
+      const deltaTime = time - lastTime;
+      lastTime = time;
+      dropCounter += deltaTime;
+      if (dropCounter > dropInterval) {
+        playerDrop();
+      }
+      drawBoard();
+      requestAnimationFrame(update);
+    }
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft") {
+        current.x--;
+        if (collide(board, current)) current.x++;
+      } else if (event.key === "ArrowRight") {
+        current.x++;
+        if (collide(board, current)) current.x--;
+      } else if (event.key === "ArrowDown") {
+        playerDrop();
+      } else if (event.key === "ArrowUp") {
+        playerRotate();
+      }
+    });
+
+    update();
+  </script>
+</body>
+</html>

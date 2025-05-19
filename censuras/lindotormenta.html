@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulación de Tormenta</title>
+  <link rel="stylesheet" href="../css/estilotormenta.css" />
+</head>
+<body>
+
+  <div id="sky">
+    <!-- Objetos interactivos -->
+<a href="imagenescensuradas.html" class="objeto-interactivo" id="paraguas1" title="Resistencia">
+  <img src="../img/paraguas1.png" alt="Paraguas Resistencia" />
+</a>
+
+<a href="libertdexpresion.html" class="objeto-interactivo" id="paraguas2" title="Escapar de la tormenta">
+  <img src="../img/paraguas2.png" alt="Paraguas Fuga" />
+</a>
+
+<a href="chinanodice.html" class="objeto-interactivo" id="papel1" title="Filtración de documentos">
+  <img src="../img/papel1.png" alt="Papel Filtrado" />
+</a>
+
+<a href="videocensura.html" class="objeto-interactivo" id="papel2" title="Verdades ocultas">
+  <img src="../img/papel2.png" alt="Papel Verdad" />
+</a>
+
+    <video id="clouds" muted loop playsinline>
+      <source src="../video/relampagos.mp4" type="video/mp4">
+      Tu navegador no soporta video HTML5.
+    </video>
+  
+  <!-- <div class="sun"></div> --> <!-- Ya no lo necesitas si usas imagen -->
+    <div class="rain" id="rain"></div>
+    <div class="lightning" id="lightning"></div>
+  </div>
+
+  <!-- Sonidos -->
+  <audio id="lluvia" src="../sonido/lluvia.wav" loop></audio>
+  <audio id="trueno" src="../sonido/trueno.wav"></audio>
+  <audio id="truenoExtra" src="../sonido/trueno2.wav"></audio>
+
+  <script src="../js/scryptt.js"></script>
+</body>
+</html>

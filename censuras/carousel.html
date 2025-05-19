@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calesita de la Censura</title>
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .carousel {
+      position: relative;
+      width: 80%;
+      max-width: 700px;
+      overflow: hidden;
+      border: 3px dashed red;
+      box-shadow: 0 0 20px red;
+      border-radius: 10px;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.7s ease-in-out;
+      width: 100%;
+    }
+
+    .slide {
+      flex: 1 0 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #222;
+      position: relative;
+    }
+
+    .slide img {
+      max-width: 100%;
+      max-height: 80vh;
+      filter: grayscale(100%) contrast(1.2);
+      transition: filter 0.5s;
+    }
+
+    .slide img:hover {
+      filter: grayscale(0%) contrast(1.1);
+    }
+
+    .caption {
+      position: absolute;
+      bottom: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px 20px;
+      font-size: 1em;
+      letter-spacing: 1px;
+      border-left: 3px solid red;
+    }
+
+    .controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+
+    .control-btn {
+      background: rgba(255, 0, 0, 0.5);
+      color: white;
+      border: none;
+      font-size: 2em;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .control-btn:hover {
+      background: red;
+    }
+
+    .interference {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('interferencia.gif') repeat;
+      opacity: 0.2;
+      pointer-events: none;
+      z-index: 10;
+      animation: flicker 1s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 0.1; }
+      50% { opacity: 0.4; }
+    }
+
+    .message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      display: none;
+      background: #000;
+      padding: 30px;
+      border: 2px solid red;
+      border-radius: 10px;
+      z-index: 20;
+    }
+
+    .message.show-message {
+      display: block;
+    }
+
+    .message img {
+      width: 100px;
+      margin: 10px;
+      border: 2px solid red;
+      border-radius: 5px;
+    }
+
+    .message button {
+      margin: 15px 10px;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .message button:hover {
+      background-color: darkred;
+    }
+  </style>
+</head>
+<body>
+
+<div class="carousel">
+  <div class="slides" id="slides">
+    <div class="slide">
+      <img src="../img/eseeselcamino.png" alt="Imagen 1">
+      <div class="caption">"Este es el camino" — ¿Pero quién lo decide?</div>
+    </div>
+    <div class="slide">
+      <img src="../img/leninmenos.png" alt="Imagen 2">
+      <div class="caption">Lenin menos, silencio más.</div>
+    </div>
+    <div class="slide">
+      <img src="../img/mitinmucho.png" alt="Imagen 3">
+      <div class="caption">Mucho mitin, poca verdad.</div>
+    </div>
+    <div class="slide">
+      <img src="../img/pocomitin.png" alt="Imagen 4">
+      <div class="caption">Poco mitin, menos libertad.</div>
+    </div>
+    <div class="slide">
+      <img src="../img/relojes.png" alt="Imagen 5">
+      <div class="caption">El tiempo también puede ser censurado.</div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="control-btn" onclick="prevSlide()">❮</button>
+    <button class="control-btn" onclick="nextSlide()">❯</button>
+  </div>
+</div>
+
+<div class="interference"></div>
+
+<div class="message" id="message">
+  <p>⚠️ Estas imágenes pueden afectar tu sensibilidad.</p>
+  <div>
+    <img src="../img/advertencia1.png" alt="Advertencia 1">
+    <img src="../img/advertencia2.png" alt="Advertencia 2">
+    <img src="../img/advertencia3.png" alt="Advertencia 3">
+  </div>
+  <p>¿Deseas continuar?</p>
+  <button onclick="continueViewing()">Sí</button>
+  <button onclick="window.location.href='../censuras/lindotormenta.html'">No</button>
+</div>
+
+<script>
+let currentIndex = 0;
+const slidesContainer = document.getElementById('slides');
+const slides = slidesContainer.querySelectorAll('.slide');
+const totalSlides = slides.length;
+
+function updateSlidePosition() {
+  slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+function prevSlide() {
+  currentIndex = (currentIndex === 0) ? totalSlides - 1 : currentIndex - 1;
+  updateSlidePosition();
+}
+
+function nextSlide() {
+  currentIndex = (currentIndex === totalSlides - 1) ? 0 : currentIndex + 1;
+  updateSlidePosition();
+}
+
+function showWarning() {
+  document.querySelector('.carousel').style.display = 'none';
+  document.querySelector('.interference').style.display = 'block';
+  document.getElementById('message').classList.add('show-message');
+}
+
+function continueViewing() {
+  document.getElementById('message').classList.remove('show-message');
+  document.querySelector('.carousel').style.display = 'block';
+  document.querySelector('.interference').style.display = 'none';
+}
+
+function exit() {
+  document.body.innerHTML = `
+    <div style="text-align:center; padding:50px;">
+      <h2>Contenido no disponible</h2>
+      <p>Has decidido no continuar.</p>
+    </div>`;
+}
+
+window.onload = () => {
+  setTimeout(showWarning, 10000); // 10 segundos
+
+    setInterval(() => {
+      showWarning();
+    }, 15000); // Cada 15 segundos vuelve a mostrar la advertencia
+  };
+</script>
+
+</body>
+</html>

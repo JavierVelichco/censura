@@ -48,7 +48,6 @@ function iniciarTormenta() {
           truenoSound.play();
         }
     
-        flashClouds();
       }, 5000);
     }, 5000);
 

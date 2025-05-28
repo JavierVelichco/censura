@@ -3,80 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Censura en Debate</title>
-  <style>
-  body {
-    background-color: #111;
-    color: white;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    padding: 20px;
-  }
-
-  video {
-    width: 80%;
-    max-width: 700px;
-    border: 3px solid red;
-    box-shadow: 0 0 15px red;
-    margin-bottom: 30px;
-  }
-
-  button {
-    background-color: red;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    padding: 10px 20px;
-    margin: 10px;
-    transition: background-color 0.3s;
-    cursor: pointer;
-  }
-
-  button:hover {
-    background-color: darkred;
-  }
-
-  #botonesContainer {
-    position: relative;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .botones-superiores {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .boton-inferior {
-    position: relative;
-    height: 100px;
-    margin-top: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #likeBtn {
-    position: absolute;
-    transition: transform 0.3s ease;
-    cursor: pointer;
-  }
-</style>
-
+    <!-- Bootstrap CSS -->
+<link rel="stylesheet" href="../css/estilos.css" />
 </head>
-<body>
+<body class="bodyvideo">
 
   <h1>¿Qué opinás sobre este contenido?</h1>
 
-  <video controls autoplay muted loop>
+  <video class="videodenuncia" controls autoplay muted loop>
     <source src="../video/callanicaragua.mp4" type="video/mp4">
     Tu navegador no soporta videos.
   </video>
@@ -84,19 +18,19 @@
 <div id="botonesContainer">
 <div class="botones-superiores">
   <a href="videocensura.html">
-    <button>No estoy de acuerdo</button>
+    <button class="buttonvideo">No estoy de acuerdo</button>
   </a>
   <a href="carousel.html">
-    <button>Es mentira</button>
+    <button class="buttonvideo">Es mentira</button>
   </a>
   <a href="libertadexpresion.html">
-    <button>Fake news</button>
+    <button class="buttonvideo">Fake news</button>
   </a>
 </div>
 
 
   <div class="boton-inferior">
-    <button id="likeBtn">Me gusta</button>
+    <button class="buttonvideo" id="likeBtn">Me gusta</button>
   </div>
 </div>
 

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Tetris de Censura</title>
   <style>
     body {
@@ -19,10 +20,73 @@
       background-size: cover;
       border: 4px solid #222;
     }
+
+    .carousel-container {
+      max-width: 310px;
+      width: 90%;
+      border: 2px dashed red;
+      box-shadow: 0 0 20px red;
+      border-radius: 10px;
+      position: relative;
+    }
   </style>
 </head>
+
 <body>
-  <canvas id="game" width="300" height="600"></canvas>
+  <div class="carousel-container">
+    <canvas id="game" width="300" height="600"></canvas>
+  </div>
+
+  <!-- Div game-over con botones -->
+  <div id="game-over" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh;
+  background-color: rgba(0,0,0,0.9); color: #eee; font-size: 1.5em; 
+  flex-direction: column; justify-content:center; align-items:center; z-index:1000; gap: 20px; 
+  text-shadow: 0 0 5px #f44336;">
+    <div style="font-weight: 600;">
+      Censura completa 😵
+    </div>
+    <div style="display:flex; gap: 15px; margin-top: 20px;">
+      <button style="
+      background-color: #f44336; 
+      border: none; 
+      padding: 10px 18px; 
+      color: white; 
+      font-weight: 600; 
+      border-radius: 6px; 
+      cursor: pointer;
+      box-shadow: 0 0 8px #f44336;
+      transition: background-color 0.3s ease;
+    " onmouseover="this.style.backgroundColor='#d32f2f'" onmouseout="this.style.backgroundColor='#f44336'"
+        onclick="window.location.href='lindotormenta.html'">Más información</button>
+
+      <button style="
+      background-color: #e53935; 
+      border: none; 
+      padding: 10px 18px; 
+      color: white; 
+      font-weight: 600; 
+      border-radius: 6px; 
+      cursor: pointer;
+      box-shadow: 0 0 8px #e53935;
+      transition: background-color 0.3s ease;
+    " onmouseover="this.style.backgroundColor='#b71c1c'" onmouseout="this.style.backgroundColor='#e53935'"
+        onclick="window.location.href='ysiestasemana.html'">Deseo ayudar</button>
+
+      <button style="
+      background-color: #9e9e9e; 
+      border: none; 
+      padding: 10px 18px; 
+      color: black; 
+      font-weight: 600; 
+      border-radius: 6px; 
+      cursor: pointer;
+      box-shadow: 0 0 8px #616161;
+      transition: background-color 0.3s ease;
+    " onmouseover="this.style.backgroundColor='#757575'" onmouseout="this.style.backgroundColor='#9e9e9e'"
+        onclick="resetGame()">¿Seguir jugando?</button>
+    </div>
+  </div>
+
 
   <script>
     const canvas = document.getElementById("game");
@@ -33,10 +97,32 @@
     const BLOCK_SIZE = 30;
     const EMPTY = 0;
 
-    // Matriz del tablero
+    const imagenes = [
+      "../img/lanareytetris.png",
+      "../img/abrazotetris.png",
+      "../img/holodomortetris.png",
+      "../img/burkatetris.png",
+      "../img/turkmenistantetris.png",
+      "../img/etiopiatetris.png",
+      "../img/bibletetris.png",
+      "../img/lanareytetris.png",
+      "../img/lanareytetris.png",
+      "../img/lanareytetris.png"
+    ];
+
+    const imagenesCensura = [
+      '../img/censurado.png',
+      '../img/censurado3.png',
+      '../img/censurado2.png'
+    ];
+
+    const imagenAleatoria = imagenes[Math.floor(Math.random() * imagenes.length)];
+    canvas.style.backgroundImage = `url(${imagenAleatoria})`;
+    canvas.style.backgroundSize = "cover";
+    canvas.style.backgroundPosition = "center";
+
     const board = Array.from({ length: ROWS }, () => Array(COLS).fill(EMPTY));
 
-    // Piezas tipo Tetris (I, J, L, O, S, T, Z)
     const SHAPES = {
       I: [[1, 1, 1, 1]],
       J: [[1, 0, 0], [1, 1, 1]],
@@ -52,16 +138,17 @@
     function getRandomPiece() {
       const type = SHAPE_KEYS[Math.floor(Math.random() * SHAPE_KEYS.length)];
       return {
-  matrix: SHAPES[type],
-  x: Math.floor(Math.random() * (COLS - SHAPES[type][0].length)),
-  y: 0
-};
+        matrix: SHAPES[type],
+        x: Math.floor(Math.random() * (COLS - SHAPES[type][0].length)),
+        y: 0
+      };
     }
 
     let current = getRandomPiece();
     let dropCounter = 0;
     let dropInterval = 250;
     let lastTime = 0;
+    let gamePaused = false; // bandera para pausar el juego
 
     function drawBlock(x, y) {
       ctx.fillStyle = 'black';
@@ -149,44 +236,43 @@
     function resetPiece() {
       current = getRandomPiece();
       if (collide(board, current)) {
-        alert("Censura completa");
-        board.forEach(row => row.fill(0));
-        // Redirigir después de mostrar la alerta de "Censura completa"
-        setTimeout(() => {
-          window.location.href = "../index.html"; // Redirige al usuario
-        }, 1000); // Redirige después de 1 segundo para dar tiempo a que el mensaje se vea
+        document.getElementById('game-over').style.display = 'flex';
+        board.forEach(row => row.fill(EMPTY));
+        gamePaused = true; // Pausamos el juego cuando termina
       }
     }
 
     function clearLines() {
-  outer: for (let y = board.length - 1; y >= 0; y--) {
-    if (board[y].every(value => value !== EMPTY)) {
-      board.splice(y, 1);
-      board.unshift(Array(COLS).fill(EMPTY));
-      y++;
+      outer: for (let y = board.length - 1; y >= 0; y--) {
+        if (board[y].every(value => value !== EMPTY)) {
+          board.splice(y, 1);
+          board.unshift(Array(COLS).fill(EMPTY));
+          y++;
 
-      // 💥 Aumenta la velocidad: más censura, más rápido
-      if (dropInterval > 100) {
-        dropInterval -= 20;
-        console.log("Velocidad aumentada:", dropInterval + "ms");
+          if (dropInterval > 100) {
+            dropInterval -= 20;
+            console.log("Velocidad aumentada:", dropInterval + "ms");
+          }
+        }
       }
     }
-  }
-}
-
 
     function update(time = 0) {
-      const deltaTime = time - lastTime;
-      lastTime = time;
-      dropCounter += deltaTime;
-      if (dropCounter > dropInterval) {
-        playerDrop();
+      if (!gamePaused) {
+        const deltaTime = time - lastTime;
+        lastTime = time;
+        dropCounter += deltaTime;
+        if (dropCounter > dropInterval) {
+          playerDrop();
+        }
+        drawBoard();
       }
-      drawBoard();
       requestAnimationFrame(update);
     }
 
     document.addEventListener("keydown", event => {
+      if (gamePaused) return; // No permite mover piezas si el juego está pausado
+
       if (event.key === "ArrowLeft") {
         current.x--;
         if (collide(board, current)) current.x++;
@@ -200,7 +286,89 @@
       }
     });
 
+    // Función para resetear todo y continuar el juego
+    function resetGame() {
+      board.forEach(row => row.fill(EMPTY));
+      current = getRandomPiece();
+      dropInterval = 250;
+      dropCounter = 0;
+      lastTime = 0;
+      gamePaused = false;
+      drawBoard();
+    }
+
+
     update();
+
+    // Código para agregar censura fuera del canvas (igual que tu original)
+    function pegarCensuraFueraDelCanvas() {
+      const img = document.createElement('img');
+      const rutaAleatoria = imagenesCensura[Math.floor(Math.random() * imagenesCensura.length)];
+      img.src = rutaAleatoria;
+      img.style.position = 'absolute';
+      img.style.opacity = '0.9';
+      img.style.pointerEvents = 'none';
+
+      const size = 50 + Math.random() * 60;
+      img.style.width = `${size}px`;
+
+      const rect = canvas.getBoundingClientRect();
+
+      let x, y;
+      const maxTries = 50;
+      let tries = 0;
+
+      do {
+        x = Math.random() * (window.innerWidth - size);
+        y = Math.random() * (window.innerHeight - size);
+        tries++;
+      } while (
+        x + size > rect.left &&
+        x < rect.right &&
+        y + size > rect.top &&
+        y < rect.bottom &&
+        tries < maxTries
+      );
+
+      img.style.left = `${x}px`;
+      img.style.top = `${y}px`;
+
+      document.body.appendChild(img);
+    }
+
+    setInterval(pegarCensuraFueraDelCanvas, 1500);
+
+    function resetGame() {
+      // Ocultar el mensaje "game-over"
+      const gameOverDiv = document.getElementById('game-over');
+      if (gameOverDiv) {
+        gameOverDiv.style.display = 'none';
+      }
+
+      // Limpiar el tablero (llenar con ceros)
+      for (let y = 0; y < ROWS; y++) {
+        board[y].fill(EMPTY);
+      }
+
+      // Cambiar la imagen de fondo a una nueva aleatoria
+      const nuevaImagen = imagenes[Math.floor(Math.random() * imagenes.length)];
+      canvas.style.backgroundImage = `url(${nuevaImagen})`;
+
+      // Reiniciar pieza actual
+      current = getRandomPiece();
+
+      // Reiniciar flags y contadores
+      dropInterval = 250;
+      dropCounter = 0;
+      lastTime = 0;
+      gamePaused = false;
+
+      // Dibujar el tablero limpio
+      drawBoard();
+    }
+
+
   </script>
 </body>
+
 </html>

@@ -1,4 +1,3 @@
-const sun = document.querySelector(".sun");
 const clouds = document.getElementById("clouds");
 const rain = document.getElementById("rain");
 const lightning = document.getElementById("lightning");
@@ -39,25 +38,25 @@ function iniciarTormenta() {
         setTimeout(() => {
           lightning.style.opacity = 0;
         }, 100);
-    
+
         // Sonido principal de trueno
         truenoExtra.play();
-    
+
         // Trueno extra aleatorio (30% de probabilidad)
         if (Math.random() < 0.3) {
           truenoSound.play();
         }
-    
+
       }, 5000);
     }, 5000);
 
     // Mostrar objetos interactivos tras la tormenta
-setTimeout(() => {
-  document.querySelectorAll('.objeto-interactivo').forEach(obj => {
-    obj.style.opacity = 1;
-    obj.style.pointerEvents = "auto"; // ✅ Ahora sí pueden recibir clics
-  });
-}, 6000); // aparecen 6 segundos después del inicio
+    setTimeout(() => {
+      document.querySelectorAll('.objeto-interactivo').forEach(obj => {
+        obj.style.opacity = 1;
+        obj.style.pointerEvents = "auto"; // ✅ Ahora sí pueden recibir clics
+      });
+    }, 6000); // aparecen 6 segundos después del inicio
 
 
   }, 1000); // ⏱️ Espera 1 segundo tras el movimiento del mouse

@@ -1,84 +1,117 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Calesita de la Censura</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="../css/estilos.css" />
+  <link rel="stylesheet" href="../css/estilos.css" />
 
 </head>
+
 <body class="bodycarousel">
 
-<div class="carousel-container position-relative">
-  <div id="censuraCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active text-center bg-dark">
-        <img src="../img/eseeselcamino.png" class="d-block w-100" alt="1">
-        <div class="carousel-caption">"Este es el camino" — ¿Pero quién lo decide?</div>
+  <div class="carousel-container position-relative">
+    <div id="censuraCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active text-center bg-dark">
+          <img src="../img/c/eseeselcamino.png" class="d-block w-100" alt="1">
+          <div class="carousel-caption">"Este es el camino" — ¿Pero quién lo decide?</div>
+        </div>
+        <div class="carousel-item text-center bg-dark">
+          <img src="../img/c/leninmenos.png" class="d-block w-100" alt="2">
+          <div class="carousel-caption">Lenin menos, silencio más.</div>
+        </div>
+        <div class="carousel-item text-center bg-dark">
+          <img src="../img/c/leninmenosmenos.png" class="d-block w-100" alt="2">
+          <div class="carousel-caption">Lenin menos, silencio más.</div>
+        </div>
+        <div class="carousel-item text-center bg-dark">
+          <img src="../img/c/mitinmucho.png" class="d-block w-100" alt="3">
+          <div class="carousel-caption">Mucho mitin, poca verdad.</div>
+        </div>
+        <div class="carousel-item text-center bg-dark">
+          <img src="../img/c/pocomitin.png" class="d-block w-100" alt="4">
+          <div class="carousel-caption">Poco mitin, menos libertad.</div>
+        </div>
+        <div class="carousel-item text-center bg-dark">
+          <img src="../img/c/relojes.png" class="d-block w-100" alt="5">
+          <div class="carousel-caption">El tiempo también puede ser censurado.</div>
+        </div>
+        <div class="carousel-item text-center bg-dark">
+          <img src="../img/c/relojesdos.png" class="d-block w-100" alt="4">
+          <div class="carousel-caption">El tiempo siempre gana.</div>
+        </div>
+        <div class="carousel-item text-center bg-dark">
+          <img src="../img/c/heroicamasmenos.png" class="d-block w-100" alt="4">
+          <div class="carousel-caption">Heroes de la mentira.</div>
+        </div>
+        <div class="carousel-item text-center bg-dark">
+          <img src="../img/c/heroicamenos.png" class="d-block w-100" alt="4">
+          <div class="carousel-caption">Saqueadores de la verdad.</div>
+        </div>
+        <div class="carousel-item text-center bg-dark">
+          <img src="../img/c/unomenos.png" class="d-block w-100" alt="4">
+          <div class="carousel-caption">Algo en el no me terminaba de cerrar.</div>
+        </div>
+        <div class="carousel-item text-center bg-dark">
+          <img src="../img/c/niunomenos.png" class="d-block w-100" alt="4">
+          <div class="carousel-caption">Aún me caes bien.</div>
+        </div>
       </div>
-      <div class="carousel-item text-center bg-dark">
-        <img src="../img/leninmenos.png" class="d-block w-100" alt="2">
-        <div class="carousel-caption">Lenin menos, silencio más.</div>
-      </div>
-      <div class="carousel-item text-center bg-dark">
-        <img src="../img/mitinmucho.png" class="d-block w-100" alt="3">
-        <div class="carousel-caption">Mucho mitin, poca verdad.</div>
-      </div>
-      <div class="carousel-item text-center bg-dark">
-        <img src="../img/pocomitin.png" class="d-block w-100" alt="4">
-        <div class="carousel-caption">Poco mitin, menos libertad.</div>
-      </div>
-      <div class="carousel-item text-center bg-dark">
-        <img src="../img/relojes.png" class="d-block w-100" alt="5">
-        <div class="carousel-caption">El tiempo también puede ser censurado.</div>
-      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#censuraCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#censuraCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
     </div>
 
-    <button class="carousel-control-prev" type="button" data-bs-target="#censuraCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#censuraCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon"></span>
-    </button>
-  </div>
+    <div class="interference"></div>
 
-  <div class="interference"></div>
-
-  <div class="message" id="message">
-    <p>⚠️ Estas imágenes pueden afectar tu sensibilidad.</p>
-    <div>
-      <img src="../img/advertencia1.png" alt="Advertencia 1">
-      <img src="../img/advertencia2.png" alt="Advertencia 2">
-      <img src="../img/advertencia3.png" alt="Advertencia 3">
+    <div class="message" id="message">
+      <p>⚠️ Estas imágenes pueden afectar tu sensibilidad.</p>
+      <div>
+        <img src="../img/noveo.png" alt="No veo" onclick="window.location.href='../censuras/imagenescensuradas.html'"
+          style="cursor: pointer;">
+        <img src="../img/nooigo.png" alt="No oigo" onclick="window.location.href='../censuras/videocensura.html'"
+          style="cursor: pointer;">
+        <img src="../img/nohablo.png" alt="No hablo" onclick="window.location.href='../censuras/libertdexpresion.html'"
+          style="cursor: pointer;">
+      </div>
+      <br>
+      <p>¿Deseas continuar?</p>
+      <button onclick="continueViewing()">Sí</button>
+      <button onclick="window.location.href='../censuras/lindotormenta.html'">No</button>
     </div>
-    <p>¿Deseas continuar?</p>
-    <button onclick="continueViewing()">Sí</button>
-    <button onclick="window.location.href='../censuras/lindotormenta.html'">No</button>
   </div>
-</div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
-function showWarning() {
-  document.querySelector('.carousel-container').querySelector('.carousel').style.display = 'none';
-  document.querySelector('.interference').style.display = 'block';
-  document.getElementById('message').classList.add('show-message');
-}
+  <script>
+    function showWarning() {
+      document.querySelector('.carousel-container').querySelector('.carousel').style.display = 'none';
+      document.querySelector('.interference').style.display = 'block';
+      document.getElementById('message').classList.add('show-message');
+    }
 
-function continueViewing() {
-  document.getElementById('message').classList.remove('show-message');
-  document.querySelector('.carousel').style.display = 'block';
-  document.querySelector('.interference').style.display = 'none';
-}
+    function continueViewing() {
+      document.getElementById('message').classList.remove('show-message');
+      document.querySelector('.carousel').style.display = 'block';
+      document.querySelector('.interference').style.display = 'none';
+    }
 
-window.onload = () => {
-  setTimeout(showWarning, 10000);
-  setInterval(showWarning, 15000);
-};
-</script>
+    window.onload = () => {
+      setTimeout(showWarning, 10000);
+      setTimeout(showWarning, 8000);
+      setInterval(showWarning, 4000);
+
+    };
+  </script>
 
 </body>
+
 </html>

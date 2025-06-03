@@ -1,72 +1,113 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Censura en Debate</title>
-    <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="../css/estilos.css" />
+  <link rel="stylesheet" href="../css/estilos.css" />
+
 </head>
+
 <body class="bodyvideo">
 
-  <h1>¿Qué opinás sobre este contenido?</h1>
 
-  <video class="videodenuncia" controls autoplay muted loop>
-    <source src="../video/callanicaragua.mp4" type="video/mp4">
+
+  <video id="video" class="videodenuncia blur" controls autoplay muted loop>
+    <source src="../video/callanicaragua.mp4" type="video/mp4" />
     Tu navegador no soporta videos.
   </video>
 
-<div id="botonesContainer">
-<div class="botones-superiores">
-  <a href="videocensura.html">
-    <button class="buttonvideo">No estoy de acuerdo</button>
-  </a>
-  <a href="carousel.html">
-    <button class="buttonvideo">Es mentira</button>
-  </a>
-  <a href="libertadexpresion.html">
-    <button class="buttonvideo">Fake news</button>
-  </a>
-</div>
-
-
-  <div class="boton-inferior">
-    <button class="buttonvideo" id="likeBtn">Me gusta</button>
+  <div id="monosContainer">
+    <img id="nioigo" src="../img/nioigo.png" alt="No oigo - Activar sonido" />
+    <img id="niveo" src="../img/niveo.png" alt="No veo - Quitar censura" />
+    <img id="nihablo" src="../img/nihablo.png" alt="No hablo - Ir a otra página" />
   </div>
-</div>
 
- 
-<script>
-  const likeBtn = document.getElementById('likeBtn');
-  const botonInferior = document.querySelector('.boton-inferior');
-  let userResponded = false;
+  <div id="botonesContainer">
+    <div class="botones-superiores">
+      <a href="videocensura.html">
+        <button class="buttonvideo">No estoy de acuerdo</button>
+      </a>
+      <a href="carousel.html">
+        <button class="buttonvideo">Es mentira</button>
+      </a>
+      <a href="libertdexpresion.html">
+        <button class="buttonvideo">Fake news</button>
+      </a>
+    </div>
 
-  likeBtn.addEventListener('mouseover', () => {
-    const maxX = botonInferior.offsetWidth - likeBtn.offsetWidth;
-    const maxY = botonInferior.offsetHeight - likeBtn.offsetHeight;
+    <div class="boton-inferior">
+      <button class="buttonvideo" id="likeBtn">Me gusta</button>
+    </div>
+  </div>
 
-    const newX = Math.random() * maxX;
-    const newY = Math.random() * maxY;
+  <script>
+    const video = document.getElementById('video');
+    const nioigo = document.getElementById('nioigo');
+    const niveo = document.getElementById('niveo');
+    const nihablo = document.getElementById('nihablo');
 
-    likeBtn.style.transform = `translate(${newX}px, ${newY}px)`;
-  });
+    let playCount = 0; // contador de reproducciones
 
-  likeBtn.addEventListener('click', (e) => {
-    e.preventDefault(); // Impide el clic
-  });
+    // Evento que se dispara cuando termina el video
+    video.addEventListener('ended', () => {
+      playCount++;
+      if (playCount < 2) {
+        video.play(); // Reproducir nuevamente
+      } else {
+        window.location.href = 'otra-pagina.html'; // Cambia a tu URL deseada
+      }
+    });
 
-  function respuesta(tipo) {
-    userResponded = true; // Marca que el usuario respondió
-    alert(`Elegiste: ${tipo}`);
-  }
+    // Activar sonido al clicar nioigo
+    nioigo.addEventListener('click', () => {
+      video.muted = false;
+      video.play();
+      nioigo.style.display = 'none'; // Oculta el icono tras activar sonido
+    });
 
-  // ⏱ Redirige a otra página si no hay respuesta en 42 segundos
-  setTimeout(() => {
-    if (!userResponded) {
-      window.location.href = "lindotormenta.html"; // Cambia por tu URL
+    // Quitar blur al clicar niveo
+    niveo.addEventListener('click', () => {
+      video.classList.remove('blur');
+      niveo.style.display = 'none'; // Opcional: oculta el icono al quitar blur
+    });
+
+    // Redirigir al clicar nihablo
+    nihablo.addEventListener('click', () => {
+      window.location.href = 'llueve.html'; // Cambia esta URL a la que quieras
+    });
+
+    // Botón "Me gusta" evasivo
+    const likeBtn = document.getElementById('likeBtn');
+    const botonInferior = document.querySelector('.boton-inferior');
+    let userResponded = false;
+
+    likeBtn.addEventListener('mouseover', () => {
+      const maxX = botonInferior.offsetWidth - likeBtn.offsetWidth;
+      const maxY = botonInferior.offsetHeight - likeBtn.offsetHeight;
+
+      const newX = Math.random() * maxX;
+      const newY = Math.random() * maxY;
+
+      likeBtn.style.transform = `translate(${newX}px, ${newY}px)`;
+    });
+
+    likeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+    });
+
+    function respuesta(tipo) {
+      userResponded = true;
+      alert(`Elegiste: ${tipo}`);
     }
-  }, 42000); // 42 segundos
-</script>
 
+    setTimeout(() => {
+      if (!userResponded) {
+        window.location.href = 'lindotormenta.html';
+      }
+    }, 42000);
 
+  </script>
 </body>
+
 </html>

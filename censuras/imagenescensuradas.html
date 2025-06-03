@@ -1,180 +1,183 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <title>Imágenes Censuradas</title>
-    <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="../css/estilos.css" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../css/estilos.css" />
 </head>
+
 <body class="bodylibertad">
 
-<div class="gridlibertad">
-  <div class="imagen-containerlibertad">
-    <canvas width="350" height="250" class="canvaslibertad"></canvas>
+  <div class="gridlibertad">
+    <div class="imagen-containerlibertad">
+      <canvas width="350" height="250" class="canvaslibertad"></canvas>
       <div class="msg">Haz clic para ver más</div> <!-- ESTO FALTA -->
 
-  </div>
- <div class="imagen-containerlibertad">
-    <canvas width="350" height="250" class="canvaslibertad"></canvas>
+    </div>
+    <div class="imagen-containerlibertad">
+      <canvas width="350" height="250" class="canvaslibertad"></canvas>
       <div class="msg">Haz clic para ver más</div> <!-- ESTO FALTA -->
 
-  </div>
-  <div class="imagen-containerlibertad">
-    <canvas width="350" height="250" class="canvaslibertad"></canvas>
+    </div>
+    <div class="imagen-containerlibertad">
+      <canvas width="350" height="250" class="canvaslibertad"></canvas>
       <div class="msg">Haz clic para ver más</div> <!-- ESTO FALTA -->
 
-  </div>
-<div class="imagen-containerlibertad">
-    <canvas width="350" height="250" class="canvaslibertad"></canvas>
+    </div>
+    <div class="imagen-containerlibertad">
+      <canvas width="350" height="250" class="canvaslibertad"></canvas>
       <div class="msg">Haz clic para ver más</div> <!-- ESTO FALTA -->
 
-  </div>
- <div class="imagen-containerlibertad">
-    <canvas width="350" height="250" class="canvaslibertad"></canvas>
+    </div>
+    <div class="imagen-containerlibertad">
+      <canvas width="350" height="250" class="canvaslibertad"></canvas>
       <div class="msg">Haz clic para ver más</div> <!-- ESTO FALTA -->
 
-  </div>
- <div class="imagen-containerlibertad">
-    <canvas width="350" height="250" class="canvaslibertad"></canvas>
+    </div>
+    <div class="imagen-containerlibertad">
+      <canvas width="350" height="250" class="canvaslibertad"></canvas>
       <div class="msg">Haz clic para ver más</div> <!-- ESTO FALTA -->
 
+    </div>
   </div>
-</div>
-<div class="gridm">
-  <div class="mariposa-container"></div>
-  <div class="mariposa-container"></div>
-  <div class="mariposa-container"></div>
-  <div class="mariposa-container"></div>
-  <div class="mariposa-container"></div>
-  <div class="mariposa-container"></div>
-</div>
+  <div class="gridm">
+    <div class="mariposa-container"></div>
+    <div class="mariposa-container"></div>
+    <div class="mariposa-container"></div>
+    <div class="mariposa-container"></div>
+    <div class="mariposa-container"></div>
+    <div class="mariposa-container"></div>
+  </div>
 
   <script>
-const canvases = document.querySelectorAll('.canvaslibertad');
-const mensajes = document.querySelectorAll('.msg');
-const enlaces = [
-  '../censuras/ysiestasemana.html',
-  '../censuras/libertadexpresion.html',
-  '../censuras/chinanodice.html',
-  '../censuras/lindotormenta.html',
-  '../censuras/chinanodice.html',
-  '../censuras/videocensura.html'
-];
-const mariposaContainers = document.querySelectorAll('.mariposa-container');
+    const canvases = document.querySelectorAll('.canvaslibertad');
+    const mensajes = document.querySelectorAll('.msg');
+    const enlaces = [
+      '../censuras/ysiestasemana.html',
+      '../censuras/libertdexpresion.html',
+      '../censuras/chinanodice.html',
+      '../censuras/lindotormenta.html',
+      '../censuras/chinanodice.html',
+      '../censuras/videocensura.html'
+    ];
+    const mariposaContainers = document.querySelectorAll('.mariposa-container');
 
-const imagenes = [
-  '../img/winniechina.png',
-  '../img/periodistapalestino.png',
-  '../img/nicaragua.png',
-  '../img/moscu.png',
-  '../img/tankman.png',
-  '../img/cuba.png'
-];
+    const imagenes = [
+      '../img/winniechina.png',
+      '../img/ldexpresion.png',
+      '../img/nicaragua.png',
+      '../img/moscu.png',
+      '../img/tankman.png',
+      '../img/cuba.png'
+    ];
 
     function animarMariposa(mariposa) {
-  let x = Math.random() * 100; // posición inicial relativa
-  let y = 0;
-  const velocidadY = 0.5 + Math.random(); // velocidad vertical
-  const amplitud = 40 + Math.random() * 60; // cuánto se mueve hacia los lados
-  const frecuencia = 0.04 + Math.random() * 0.05; // curva del zigzag
-  const inicio = Date.now();
+      let x = Math.random() * 100; // posición inicial relativa
+      let y = 0;
+      const velocidadY = 0.5 + Math.random(); // velocidad vertical
+      const amplitud = 40 + Math.random() * 60; // cuánto se mueve hacia los lados
+      const frecuencia = 0.04 + Math.random() * 0.05; // curva del zigzag
+      const inicio = Date.now();
 
-  function mover() {
-    const t = (Date.now() - inicio) / 1000;
-    y = -t * 50; // velocidad vertical hacia arriba
-    const offsetX = Math.sin(t * 2 * Math.PI * frecuencia) * amplitud;
+      function mover() {
+        const t = (Date.now() - inicio) / 1000;
+        y = -t * 50; // velocidad vertical hacia arriba
+        const offsetX = Math.sin(t * 2 * Math.PI * frecuencia) * amplitud;
 
-    mariposa.style.transform = `translate(${x + offsetX}px, ${y}px)`;
-    mariposa.style.opacity = 1 - Math.abs(y) / 200;
+        mariposa.style.transform = `translate(${x + offsetX}px, ${y}px)`;
+        mariposa.style.opacity = 1 - Math.abs(y) / 200;
 
-    if (y > -200) {
-      requestAnimationFrame(mover);
-    } else {
-      mariposa.remove(); // desaparece cuando se va arriba
+        if (y > -200) {
+          requestAnimationFrame(mover);
+        } else {
+          mariposa.remove(); // desaparece cuando se va arriba
+        }
+      }
+
+      mover();
     }
-  }
-
-  mover();
-}
 
 
-canvases.forEach((canvas, index) => {
-  const ctx = canvas.getContext('2d');
-  const img = new Image();
-  img.src = imagenes[index];
+    canvases.forEach((canvas, index) => {
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      img.src = imagenes[index];
 
-  img.onload = () => {
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      img.onload = () => {
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
 
 
-    setTimeout(() => {
-  
+        setTimeout(() => {
 
-      pixelarImagen(img, canvas, ctx, 10); // Censura
 
-      mensajes[index].classList.add('visible');
+          pixelarImagen(img, canvas, ctx, 10); // Censura
 
-      // Crear enlace de mariposa animada
-      const mariposaLink = document.createElement('a');
-      mariposaLink.href = enlaces[index];
-      mariposaLink.target = "_blank";
-      mariposaLink.className = 'mariposa';
+          mensajes[index].classList.add('visible');
 
-      // Posicionamiento para que "suba"
-      mariposaLink.style.position = 'absolute';
-      mariposaLink.style.left = '50%';
-      mariposaLink.style.bottom = '0';
-      mariposaLink.style.transform = 'translateX(-50%)';
+          // Crear enlace de mariposa animada
+          const mariposaLink = document.createElement('a');
+          mariposaLink.href = enlaces[index];
+          mariposaLink.target = "_blank";
+          mariposaLink.className = 'mariposa';
 
-      mariposaContainers[index].appendChild(mariposaLink);
-      animarMariposa(mariposaLink);
+          // Posicionamiento para que "suba"
+          mariposaLink.style.position = 'absolute';
+          mariposaLink.style.left = '50%';
+          mariposaLink.style.bottom = '0';
+          mariposaLink.style.transform = 'translateX(-50%)';
 
-      mariposaContainers[index].classList.add('visible');
+          mariposaContainers[index].appendChild(mariposaLink);
+          animarMariposa(mariposaLink);
 
-      // Crear mariposas en bucle
-      setInterval(() => {
-        const nuevaMariposa = document.createElement('a');
-        nuevaMariposa.href = enlaces[index];
-        nuevaMariposa.target = "_blank";
-        nuevaMariposa.className = 'mariposa';
-        nuevaMariposa.style.position = 'absolute';
-        nuevaMariposa.style.left = '50%';
-        nuevaMariposa.style.bottom = '0';
-        nuevaMariposa.style.transform = 'translateX(-50%)';
+          mariposaContainers[index].classList.add('visible');
 
-  mariposaContainers[index].appendChild(nuevaMariposa);
-animarMariposa(nuevaMariposa); // 🎉 animación aleatoria
+          // Crear mariposas en bucle
+          setInterval(() => {
+            const nuevaMariposa = document.createElement('a');
+            nuevaMariposa.href = enlaces[index];
+            nuevaMariposa.target = "_blank";
+            nuevaMariposa.className = 'mariposa';
+            nuevaMariposa.style.position = 'absolute';
+            nuevaMariposa.style.left = '50%';
+            nuevaMariposa.style.bottom = '0';
+            nuevaMariposa.style.transform = 'translateX(-50%)';
 
-      }, 4000); // 4000ms = 4 segundos
-    }, 4000); // Primer retraso
-  };
-});
+            mariposaContainers[index].appendChild(nuevaMariposa);
+            animarMariposa(nuevaMariposa); // 🎉 animación aleatoria
 
-function pixelarImagen(img, canvas, ctx, pixelSize) {
-  const { width, height } = canvas;
-  const tempCanvas = document.createElement('canvas');
-  const tempCtx = tempCanvas.getContext('2d');
+          }, 4000); // 4000ms = 4 segundos
+        }, 4000); // Primer retraso
+      };
+    });
 
-  tempCanvas.width = width / pixelSize;
-  tempCanvas.height = height / pixelSize;
+    function pixelarImagen(img, canvas, ctx, pixelSize) {
+      const { width, height } = canvas;
+      const tempCanvas = document.createElement('canvas');
+      const tempCtx = tempCanvas.getContext('2d');
 
-  tempCtx.drawImage(img, 0, 0, tempCanvas.width, tempCanvas.height);
+      tempCanvas.width = width / pixelSize;
+      tempCanvas.height = height / pixelSize;
 
-  ctx.imageSmoothingEnabled = false;
-  ctx.clearRect(0, 0, width, height);
-  ctx.drawImage(
-    tempCanvas,
-    0,
-    0,
-    tempCanvas.width,
-    tempCanvas.height,
-    0,
-    0,
-    width,
-    height
-  );
-}
+      tempCtx.drawImage(img, 0, 0, tempCanvas.width, tempCanvas.height);
+
+      ctx.imageSmoothingEnabled = false;
+      ctx.clearRect(0, 0, width, height);
+      ctx.drawImage(
+        tempCanvas,
+        0,
+        0,
+        tempCanvas.width,
+        tempCanvas.height,
+        0,
+        0,
+        width,
+        height
+      );
+    }
   </script>
 </body>
+
 </html>

@@ -1,21 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>¿Y si esta semana te toca a vos?</title>
   <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="../css/estilos.css" />
+  <link rel="stylesheet" href="../css/estilos.css" />
+  <style>
+    /* Estilos para centrar la imagen del mono */
+    .mono-aleatorio {
+      display: block;
+      margin: 30px auto;
+      max-width: 300px;
+      height: auto;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
 </head>
+
 <body class="bodyysi">
 
   <!-- Oscurecimiento animado -->
   <div class="overlay"></div>
 
   <!-- Mensaje principal -->
-  <div class="mensaje">
+  <div class="mensaje" id="mensaje-principal">
     <h1>¿Y SI ESTA SEMANA<br>TE TOCA A VOS?</h1>
-    <a href="../index.html" class="btn">Más información</a>
+    <a href="#" id="btn-mas-info" class="btn">Más información</a>
   </div>
+
+  <!-- Aquí se mostrará el mono aleatorio -->
+  <div id="contenedor-mono"></div>
 
   <!-- Sonido ambiente -->
   <audio autoplay loop>
@@ -23,5 +48,41 @@
     Tu navegador no soporta audio HTML5.
   </audio>
 
+  <script>
+    const monos = [
+      '../img/niveo.png',
+      '../img/nioigo.png',
+      '../img/nihablo.png'
+    ];
+
+    const btn = document.getElementById('btn-mas-info');
+    const mensaje = document.getElementById('mensaje-principal');
+    const contenedorMono = document.getElementById('contenedor-mono');
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault(); // Evitar comportamiento predeterminado del enlace
+
+      // Elegir un mono aleatorio
+      const monoAleatorio = monos[Math.floor(Math.random() * monos.length)];
+
+      // Ocultar el mensaje principal
+      mensaje.style.display = 'none';
+
+      // Crear la imagen del mono y agregarla al contenedor
+      const imgMono = document.createElement('img');
+      imgMono.src = monoAleatorio;
+      imgMono.alt = 'Mono sabio';
+      imgMono.classList.add('mono-aleatorio');
+
+      contenedorMono.appendChild(imgMono);
+
+      // Después de 1.5 segundos redirigir a la página principal
+      setTimeout(() => {
+        window.location.href = '../index.html';
+      }, 1500);
+    });
+  </script>
+
 </body>
+
 </html>

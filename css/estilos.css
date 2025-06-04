@@ -14136,7 +14136,19 @@ html {
 }
 
 /* China no dice */
+.htmlchina {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    overflow-y: auto;
+
+}
+
 .bodychinanodice {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    overflow-y: auto;
     font-family: 'Times New Roman', Times, serif;
     background-color: #111;
     padding: 20px;
@@ -14183,7 +14195,8 @@ h1 {
     filter: blur(8px);
 }
 
-.overlay {
+.overlaychina {
+    pointer-events: none;
     position: absolute;
     top: 0;
     left: 0;
@@ -14202,7 +14215,7 @@ h1 {
     transition: opacity 1s ease;
 }
 
-.term.censurado .overlay {
+.term.censurado .overlaychina {
     opacity: 1;
 }
 
@@ -14429,6 +14442,22 @@ h1 {
     border: 1px solid red;
 }
 
+.desintegrar span {
+    display: inline-block;
+    white-space: pre;
+    /* ← Esto respeta los espacios y saltos */
+    opacity: 1;
+    animation: desaparecer 2s forwards;
+    animation-delay: calc(var(--i) * 0.03s);
+}
+
+@keyframes desaparecer {
+    to {
+        opacity: 0;
+        transform: translateY(-20px) rotate(5deg);
+    }
+}
+
 /* denuncia video */
 
 .bodyvideo {
@@ -14445,8 +14474,8 @@ h1 {
 }
 
 .videodenuncia {
-    width: 80%;
-    max-width: 700px;
+    width: 70%;
+    max-width: 600px;
     border: 3px solid red;
     box-shadow: 0 0 15px red;
     margin-top: 20px;
@@ -14460,9 +14489,12 @@ h1 {
     color: white;
     border: none;
     border-radius: 4px;
-    font-size: 16px;
-    padding: 10px 20px;
-    margin: 10px;
+    font-size: 12px;
+    /* reducido de 16px */
+    padding: 6px 10px;
+    /* reducido de 10px 15px */
+    margin: 6px;
+    /* reducido de 10px */
     transition: background-color 0.3s;
     cursor: pointer;
 }
@@ -14473,8 +14505,8 @@ button:hover {
 
 #botonesContainer {
     position: relative;
-    width: 100%;
-    max-width: 600px;
+    width: 70%;
+    max-width: 700px;
     margin: 0 auto;
     text-align: center;
 }
@@ -14513,7 +14545,7 @@ button:hover {
 
 #monosContainer img {
     cursor: pointer;
-    width: 180px;
+    width: 100px;
     height: auto;
     transition: transform 0.3s;
 }
@@ -14528,6 +14560,8 @@ button:hover {
     transition: filter 1s ease;
 }
 
+
+/* libertadexpresion */
 
 /* libertadexpresion */
 
@@ -14557,11 +14591,12 @@ button:hover {
 }
 
 .imagen-containerlibertad {
+
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-    /* ← necesario */
+    /* ← necesario para el overlay */
     overflow: visible;
 }
 
@@ -14574,11 +14609,24 @@ button:hover {
 }
 
 .msg {
-    margin-top: 10px;
-    font-size: 1em;
-    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     opacity: 0;
     transition: opacity 1s ease;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.msg img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .msg.visible {
@@ -14619,6 +14667,7 @@ button:hover {
     opacity: 0;
     pointer-events: auto;
 }
+
 
 /* FONDO LLUVIA (contenedor del contenido pixelado) */
 /* Contenido que puede pixelarse */

@@ -41,7 +41,7 @@
             'censuras/chinanodice.html',   // Nombre de la página 6
             'censuras/carousel.html',   // Nombre de la página 7
             'censuras/denunciavideo.html',   // Nombre de la página 8
-            'censuras/llueve.html',   // Nombre de la página 9
+
         ];
 
         let cantidadActual = 1;
@@ -92,13 +92,13 @@
 
         function salir() {
             const random = paginasAleatorias[Math.floor(Math.random() * paginasAleatorias.length)];
-            window.location.href = random;
+            window.location.href = '../censuras/lindotormenta.html'; // Redirección final
         }
 
         function continuar() {
             vecesContinuar++;
             if (vecesContinuar >= 3) {
-                window.location.href = 'https://www.wikipedia.org'; // Redirección final
+                window.location.href = random;
             } else {
                 document.getElementById('mensajeFinal').style.display = 'none';
                 iniciarLluvia(cantidadActual);

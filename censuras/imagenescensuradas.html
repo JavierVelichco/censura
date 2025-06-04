@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="bodychinanodice">
 
 <head>
   <meta charset="UTF-8" />
@@ -13,32 +13,30 @@
   <div class="gridlibertad">
     <div class="imagen-containerlibertad">
       <canvas width="350" height="250" class="canvaslibertad"></canvas>
-      <div class="msg">Haz clic para ver más</div> <!-- ESTO FALTA -->
+      <img class="msg" src="../img/censurado3.png" alt="Censurado">
+    </div>
+    <div class="imagen-containerlibertad">
+      <canvas width="350" height="250" class="canvaslibertad"></canvas>
+      <img class="msg" src="../img/censurado2.png" alt="Censurado">
 
     </div>
     <div class="imagen-containerlibertad">
       <canvas width="350" height="250" class="canvaslibertad"></canvas>
-      <div class="msg">Haz clic para ver más</div> <!-- ESTO FALTA -->
+      <img class="msg" src="../img/censurado2.png" alt="Censurado">
+    </div>
+    <div class="imagen-containerlibertad">
+      <canvas width="350" height="250" class="canvaslibertad"></canvas>
+      <img class="msg" src="../img/censurado3.png" alt="Censurado">
 
     </div>
     <div class="imagen-containerlibertad">
       <canvas width="350" height="250" class="canvaslibertad"></canvas>
-      <div class="msg">Haz clic para ver más</div> <!-- ESTO FALTA -->
+      <img class="msg" src="../img/censurado3.png" alt="Censurado">
 
     </div>
     <div class="imagen-containerlibertad">
       <canvas width="350" height="250" class="canvaslibertad"></canvas>
-      <div class="msg">Haz clic para ver más</div> <!-- ESTO FALTA -->
-
-    </div>
-    <div class="imagen-containerlibertad">
-      <canvas width="350" height="250" class="canvaslibertad"></canvas>
-      <div class="msg">Haz clic para ver más</div> <!-- ESTO FALTA -->
-
-    </div>
-    <div class="imagen-containerlibertad">
-      <canvas width="350" height="250" class="canvaslibertad"></canvas>
-      <div class="msg">Haz clic para ver más</div> <!-- ESTO FALTA -->
+      <img class="msg" src="../img/censurado2.png" alt="Censurado">
 
     </div>
   </div>
@@ -87,9 +85,9 @@
         const offsetX = Math.sin(t * 2 * Math.PI * frecuencia) * amplitud;
 
         mariposa.style.transform = `translate(${x + offsetX}px, ${y}px)`;
-        mariposa.style.opacity = 1 - Math.abs(y) / 200;
+        mariposa.style.opacity = 1 - Math.abs(y) / 1000;
 
-        if (y > -200) {
+        if (y > -1000) {
           requestAnimationFrame(mover);
         } else {
           mariposa.remove(); // desaparece cuando se va arriba
@@ -149,7 +147,7 @@
             animarMariposa(nuevaMariposa); // 🎉 animación aleatoria
 
           }, 4000); // 4000ms = 4 segundos
-        }, 4000); // Primer retraso
+        }, 3000); // Primer retraso
       };
     });
 

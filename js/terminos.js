@@ -49,7 +49,7 @@ function obtenerTerminosAleatorios(cantidad) {
 }
 
 const contenedor = document.getElementById('contenedor-terminos');
-const seleccion = obtenerTerminosAleatorios(9);
+const seleccion = obtenerTerminosAleatorios(7);
 
 // Mezclamos links para asignar aleatoriamente
 const linksMezclados = mezclarArray(linksDisponibles);
@@ -62,7 +62,7 @@ seleccion.forEach((termino, index) => {
     div.innerHTML = `
         <h2>${termino.titulo} <span class="chino">(${termino.chino})</span></h2>
         <p>${termino.descripcion}</p>
-        <div class="overlay">Contenido censurado</div>
+        <div class="overlaychina">Contenido censurado</div>
     `;
     contenedor.appendChild(div);
 });
@@ -80,4 +80,4 @@ setTimeout(() => {
             });
         }
     });
-}, 4000);
+}, 2000);

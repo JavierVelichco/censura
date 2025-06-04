@@ -2,56 +2,102 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Censura</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Censura - Trabajo Práctico</title>
     <style>
         body {
-            background-color: #f0f0f0;
+            background-color: #000;
+            /* Fondo negro */
+            color: red;
+            /* Letras rojas */
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            text-align: center;
+            padding: 2rem;
         }
 
-        h1 {
-            color: #333;
-            font-size: 2rem;
+
+        .caratula {
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            border: 3px solid red;
+            /* Marco rojo */
+            padding: 2rem;
+            /* Espaciado interno */
+            box-shadow: 0 0 15px red;
+            /* Sombra suave roja */
         }
+
+        .caratula h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+
+        .caratula h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: normal;
+        }
+
+        .caratula h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: normal;
+        }
+
+        .caratula p {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
     </style>
 </head>
 
 <body>
-    <h1>Redirigiendo a una página aleatoria...</h1>
+    <div class="caratula">
+        <div>
+            <h1>UNA | Universidad Nacional de las Artes</h1>
+        </div>
+
+        <h2>Área Transdepartamental de Artes Multimediales</h2>
+
+        <h3>Trabajo Práctico Número 1</h3>
+        <h3>Poéticas no lineales</h3>
+
+        <p>Artes Multimediales II, cátedra Rodríguez</p>
+        <p>Año 2025 - Ciudad Autónoma de Buenos Aires</p>
+    </div>
 
     <script>
-        // Lista de páginas disponibles
         const paginas = [
-            'censuras/lindotormenta.html',  // Nombre de la página 1
-            'censuras/ysiestasemana.html',  // Nombre de la página 2
-            'censuras/libertdexpresion.html',  // Nombre de la página 3
-            'censuras/imagenescensuradas.html',   // Nombre de la página 4
-            'censuras/videocensura.html',   // Nombre de la página 5
-            'censuras/chinanodice.html',   // Nombre de la página 6
-            'censuras/carousel.html',   // Nombre de la página 7
-            'censuras/denunciavideo.html',   // Nombre de la página 8
-            'censuras/llueve.html',   // Nombre de la página 9
+            'censuras/lindotormenta.html',
+            'censuras/ysiestasemana.html',
+            'censuras/libertdexpresion.html',
+            'censuras/imagenescensuradas.html',
+            'censuras/videocensura.html',
+            'censuras/chinanodice.html',
+            'censuras/carousel.html',
+            'censuras/denunciavideo.html',
+            'censuras/llueve.html',
         ];
 
-        // Función para redirigir aleatoriamente a una página de la lista
         function redirigirAleatorio() {
-            // Generamos un índice aleatorio entre 0 y el número de páginas
             const indiceAleatorio = Math.floor(Math.random() * paginas.length);
-
-            // Redirigimos a la página seleccionada aleatoriamente
             window.location.href = paginas[indiceAleatorio];
         }
 
-        // Llamamos a la función cuando la página cargue
-        window.onload = redirigirAleatorio;
+        window.onload = function () {
+            setTimeout(redirigirAleatorio, 4000);
+        }
     </script>
+
 </body>
 
 </html>

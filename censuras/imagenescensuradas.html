@@ -175,6 +175,27 @@
         height
       );
     }
+
+    function mezclarElementos(parentSelector, childSelector) {
+      const parent = document.querySelector(parentSelector);
+      const children = Array.from(parent.querySelectorAll(childSelector));
+
+      // Mezclar
+      for (let i = children.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [children[i], children[j]] = [children[j], children[i]];
+      }
+
+      // Vaciar y volver a insertar
+      parent.innerHTML = '';
+      children.forEach(child => parent.appendChild(child));
+    }
+
+    // Mezclar las imágenes de la grilla
+    mezclarElementos('.gridlibertad', '.imagen-containerlibertad');
+
+
+
   </script>
 </body>
 

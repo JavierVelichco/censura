@@ -118,7 +118,7 @@
           // Crear enlace de mariposa animada
           const mariposaLink = document.createElement('a');
           mariposaLink.href = enlaces[index];
-          mariposaLink.target = "_blank";
+          // mariposaLink.target = "_blank"; // <-- ELIMINAR esta línea
           mariposaLink.className = 'mariposa';
 
           // Posicionamiento para que "suba"
@@ -136,7 +136,7 @@
           setInterval(() => {
             const nuevaMariposa = document.createElement('a');
             nuevaMariposa.href = enlaces[index];
-            nuevaMariposa.target = "_blank";
+            // nuevaMariposa.target = "_blank"; // <-- ELIMINAR esta línea
             nuevaMariposa.className = 'mariposa';
             nuevaMariposa.style.position = 'absolute';
             nuevaMariposa.style.left = '50%';

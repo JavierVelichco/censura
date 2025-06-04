@@ -2,18 +2,32 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>¿Y si esta semana te toca a vos?</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="../css/estilos.css" />
   <style>
-    /* Estilos para centrar la imagen del mono */
+    /* Centrar y dar espacio a los monos */
+    #contenedor-mono {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
     .mono-aleatorio {
-      display: block;
-      margin: 30px auto;
-      max-width: 300px;
+      max-width: 150px;
       height: auto;
+      cursor: pointer;
       animation: fadeIn 0.5s ease forwards;
+      transition: transform 0.3s, box-shadow 0.3s;
+      border-radius: 10px;
+    }
+
+    .mono-aleatorio:hover {
+      transform: scale(1.15);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      filter: brightness(1.1);
     }
 
     @keyframes fadeIn {
@@ -31,7 +45,7 @@
 <body class="bodyysi">
 
   <!-- Oscurecimiento animado -->
-  <div class="overlay"></div>
+  <div class="overlaysemana"></div>
 
   <!-- Mensaje principal -->
   <div class="mensaje" id="mensaje-principal">
@@ -39,47 +53,57 @@
     <a href="#" id="btn-mas-info" class="btn">Más información</a>
   </div>
 
-  <!-- Aquí se mostrará el mono aleatorio -->
+  <!-- Contenedor donde aparecerán los monos -->
   <div id="contenedor-mono"></div>
 
   <!-- Sonido ambiente -->
   <audio autoplay loop>
-    <source src="../audio/silencio_tenso.mp3" type="audio/mpeg">
+    <source src="../audio/silencio_tenso.mp3" type="audio/mpeg" />
     Tu navegador no soporta audio HTML5.
   </audio>
 
   <script>
     const monos = [
-      '../img/niveo.png',
-      '../img/nioigo.png',
-      '../img/nihablo.png'
+      { src: '../img/niveo.png', url: '../censuras/lindotormenta.html' },
+      { src: '../img/nioigo.png', url: '../censuras/denunciavideo.html' },
+      { src: '../img/nihablo.png', url: '../censuras/imagenescensuradas.html' }
     ];
 
     const btn = document.getElementById('btn-mas-info');
     const mensaje = document.getElementById('mensaje-principal');
     const contenedorMono = document.getElementById('contenedor-mono');
+    let timeoutId;
 
     btn.addEventListener('click', (e) => {
-      e.preventDefault(); // Evitar comportamiento predeterminado del enlace
-
-      // Elegir un mono aleatorio
-      const monoAleatorio = monos[Math.floor(Math.random() * monos.length)];
+      e.preventDefault();
 
       // Ocultar el mensaje principal
       mensaje.style.display = 'none';
 
-      // Crear la imagen del mono y agregarla al contenedor
-      const imgMono = document.createElement('img');
-      imgMono.src = monoAleatorio;
-      imgMono.alt = 'Mono sabio';
-      imgMono.classList.add('mono-aleatorio');
+      // Limpiar cualquier contenido previo por si...
+      contenedorMono.innerHTML = '';
 
-      contenedorMono.appendChild(imgMono);
+      // Mostrar los 3 monos con sus enlaces
+      monos.forEach(mono => {
+        const imgMono = document.createElement('img');
+        imgMono.src = mono.src;
+        imgMono.alt = 'Mono sabio';
+        imgMono.classList.add('mono-aleatorio');
+        imgMono.title = "  ";
 
-      // Después de 1.5 segundos redirigir a la página principal
-      setTimeout(() => {
+        // Al hacer click en el mono, ir a su enlace y cancelar el timeout
+        imgMono.addEventListener('click', () => {
+          clearTimeout(timeoutId);
+          window.location.href = mono.url;
+        });
+
+        contenedorMono.appendChild(imgMono);
+      });
+
+      // Si el usuario no elige en 5 segundos, redirigir a página por defecto
+      timeoutId = setTimeout(() => {
         window.location.href = '../index.html';
-      }, 1500);
+      }, 5000);
     });
   </script>
 

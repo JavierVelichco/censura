@@ -12,6 +12,12 @@ const truenoExtra = document.getElementById("truenoExtra");
 function iniciarTormenta() {
   document.removeEventListener("mousemove", iniciarTormenta);
 
+  const zonaFalsa = document.getElementById("zona-falsa");
+  if (zonaFalsa) {
+    zonaFalsa.style.display = "none"; // Desaparece la zona falsa al iniciar tormenta
+  }
+
+
   // Retrasar el inicio completo 1 segundo
   setTimeout(() => {
     // Reproducir video

@@ -33,14 +33,13 @@
         ];
 
         const paginasAleatorias = [
-            'censuras/lindotormenta.html',  // Nombre de la página 1
-            'censuras/ysiestasemana.html',  // Nombre de la página 2
-            'censuras/libertdexpresion.html',  // Nombre de la página 3
-            'censuras/imagenescensuradas.html',   // Nombre de la página 4
-            'censuras/videocensura.html',   // Nombre de la página 5
-            'censuras/chinanodice.html',   // Nombre de la página 6
-            'censuras/carousel.html',   // Nombre de la página 7
-            'censuras/denunciavideo.html',   // Nombre de la página 8
+            '../censuras/ysiestasemana.html',  // Nombre de la página 2
+            '../censuras/libertdexpresion.html',  // Nombre de la página 3
+            '../censuras/imagenescensuradas.html',   // Nombre de la página 4
+            '../censuras/videocensura.html',   // Nombre de la página 5
+            '../censuras/chinanodice.html',   // Nombre de la página 6
+            '../censuras/carousel.html',   // Nombre de la página 7
+            '../censuras/denunciavideo.html',   // Nombre de la página 8
 
         ];
 
@@ -49,6 +48,7 @@
         let lluviaInterval;
         let vecesContinuar = 0;
         let siguienteAviso = 4;
+        let random = paginasAleatorias[Math.floor(Math.random() * paginasAleatorias.length)];
 
         function crearCensura() {
             const img = document.createElement('img');
@@ -122,7 +122,15 @@
                 }
             });
         });
-
+        function continuar() {
+            vecesContinuar++;
+            if (vecesContinuar >= 5) {
+                window.location.href = random;
+            } else {
+                document.getElementById('mensajeFinal').style.display = 'none';
+                iniciarLluvia(cantidadActual);
+            }
+        }
     </script>
 
 

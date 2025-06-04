@@ -22,7 +22,6 @@ const linksDisponibles = [
     '../censuras/libertdexpresion.html',
     '../censuras/imagenescensuradas.html',
     '../censuras/videocensura.html',
-    '../censuras/chinanodice.html',
     '../censuras/carousel.html',
     '../censuras/denunciavideo.html',
     '../censuras/llueve.html'

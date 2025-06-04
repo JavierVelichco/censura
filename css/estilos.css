@@ -14345,7 +14345,7 @@ h1 {
 }
 
 /* Oscurecimiento progresivo */
-.overlay {
+.overlaysemana {
     position: absolute;
     top: 0;
     left: 0;
@@ -14354,6 +14354,7 @@ h1 {
     background: rgba(0, 0, 0, 0);
     animation: darken 8s forwards;
     z-index: 1;
+    pointer-events: none;
 }
 
 @keyframes darken {
@@ -14651,6 +14652,8 @@ button:hover {
     width: 100%;
     background-color: transparent;
     overflow: visible;
+    z-index: 5;
+    /* asegúrate que sea mayor que el z-index de .msg */
 }
 
 .mariposa-container.visible {

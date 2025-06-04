@@ -107,7 +107,7 @@
       "../img/bibletetris.png",
       "../img/holodomortetris.png",
       "../img/holodomortetris.png",
-      "../img/holodomortetris.png"
+      "../img/espiritrompatetris.png"
     ];
 
     const imagenesCensura = [
@@ -134,6 +134,7 @@
     };
 
     const SHAPE_KEYS = Object.keys(SHAPES);
+    let lineasEliminadas = 0;
 
     function getRandomPiece() {
       const type = SHAPE_KEYS[Math.floor(Math.random() * SHAPE_KEYS.length)];
@@ -248,6 +249,15 @@
           board.splice(y, 1);
           board.unshift(Array(COLS).fill(EMPTY));
           y++;
+
+          lineasEliminadas++; // 🔴 Incrementamos el contador
+
+          // ⏩ Verificamos si alcanzó las 10 líneas
+          if (lineasEliminadas >= 12) {
+            window.location.href = 'denunciavideo.html'; // ✅ Cambiá a la página que quieras
+            return; // evitamos que siga ejecutando
+          }
+
 
           if (dropInterval > 100) {
             dropInterval -= 20;

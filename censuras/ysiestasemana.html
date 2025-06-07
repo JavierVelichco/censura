@@ -63,6 +63,16 @@
   </audio>
 
   <script>
+    const paginas = [
+      '../censuras/lindotormenta.html',
+      '../censuras/libertdexpresion.html',
+      '../censuras/imagenescensuradas.html',
+      '../censuras/videocensura.html',
+      '../censuras/chinanodice.html',
+      '../censuras/carousel.html',
+      '../censuras/denunciavideo.html',
+      '../censuras/llueve.html',
+    ];
     const monos = [
       { src: '../img/niveo.png', url: '../censuras/lindotormenta.html' },
       { src: '../img/nioigo.png', url: '../censuras/denunciavideo.html' },
@@ -100,10 +110,12 @@
         contenedorMono.appendChild(imgMono);
       });
 
-      // Si el usuario no elige en 5 segundos, redirigir a página por defecto
+      // Si el usuario no elige en 8 segundos, redirigir a página por defecto
       timeoutId = setTimeout(() => {
-        window.location.href = '../index.html';
-      }, 5000);
+        const indiceAleatorio = Math.floor(Math.random() * paginas.length);
+        window.location.href = paginas[indiceAleatorio];
+
+      }, 8000);
     });
   </script>
 

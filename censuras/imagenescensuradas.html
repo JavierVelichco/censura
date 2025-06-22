@@ -99,7 +99,6 @@
       mover();
     }
 
-
     canvases.forEach((canvas, index) => {
       const ctx = canvas.getContext('2d');
       const img = new Image();
@@ -108,10 +107,7 @@
       img.onload = () => {
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-
-
         setTimeout(() => {
-
 
           pixelarImagen(img, canvas, ctx, 10); // Censura
 
@@ -148,8 +144,8 @@
             mariposaContainers[index].appendChild(nuevaMariposa);
             animarMariposa(nuevaMariposa); // 🎉 animación aleatoria
 
-          }, 4000); // 4000ms = 4 segundos
-        }, 3000); // Primer retraso
+          }, 1600); // 3000ms = 3 segundos
+        }, 800); // Primer retraso
       };
     });
 
@@ -195,8 +191,6 @@
 
     // Mezclar las imágenes de la grilla
     mezclarElementos('.gridlibertad', '.imagen-containerlibertad');
-
-
 
   </script>
 </body>

@@ -57,7 +57,7 @@
       box-shadow: 0 0 8px #f44336;
       transition: background-color 0.3s ease;
     " onmouseover="this.style.backgroundColor='#d32f2f'" onmouseout="this.style.backgroundColor='#f44336'"
-        onclick="window.location.href='lindotormenta.html'">Más información</button>
+        onclick="window.location.href='denunciavideo.html'">Más información</button>
 
       <button style="
       background-color: #e53935; 
@@ -329,8 +329,17 @@
       let tries = 0;
 
       do {
-        x = Math.random() * (window.innerWidth - size);
-        y = Math.random() * (window.innerHeight - size);
+        // Queremos que aparezcan a no más de 100px alrededor del canvas
+        const margen = 170;
+
+        const minX = Math.max(0, rect.left - margen);
+        const maxX = Math.min(window.innerWidth - size, rect.right + margen);
+
+        const minY = Math.max(0, rect.top - margen);
+        const maxY = Math.min(window.innerHeight - size, rect.bottom + margen);
+
+        x = Math.random() * (maxX - minX) + minX;
+        y = Math.random() * (maxY - minY) + minY;
         tries++;
       } while (
         x + size > rect.left &&
@@ -346,7 +355,7 @@
       document.body.appendChild(img);
     }
 
-    setInterval(pegarCensuraFueraDelCanvas, 1500);
+    setInterval(pegarCensuraFueraDelCanvas, 500);
 
     function resetGame() {
       // Ocultar el mensaje "game-over"

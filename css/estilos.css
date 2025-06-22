@@ -14678,8 +14678,7 @@ button:hover {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background: url('../img/fondolluvia.png') no-repeat center center fixed;
-    background-size: cover;
+    background: url('../img/flluvi.png') no-repeat center center fixed;
     transition: filter 1.5s ease;
     width: 100vw;
     height: 100vh;

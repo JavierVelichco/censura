@@ -55,7 +55,10 @@
             const indice = Math.floor(Math.random() * imagenes.length);
             img.src = imagenes[indice];
             img.className = 'censuralluvia';
-            img.style.left = Math.random() * window.innerWidth + 'px';
+            const anchoPantalla = window.innerWidth;
+            const margenIzquierdo = anchoPantalla * 0.3; // ajustá este valor si querés más o menos margen
+            const anchoLluvia = anchoPantalla * 0.4; // ajustá este valor para hacer la lluvia más angosta o ancha
+            img.style.left = margenIzquierdo + Math.random() * anchoLluvia + 'px';
             const tamaño = 50 + Math.random() * 80;
             img.style.width = tamaño + 'px';
             img.style.animationDuration = (3 + Math.random() * 5) + 's';
